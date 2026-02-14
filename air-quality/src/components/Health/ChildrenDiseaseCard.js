@@ -50,18 +50,29 @@ const precautionsByLevel = {
   severe: "Emergency alert! Keep children indoors. Consult doctor. Use best-quality air filter.",
 };
 
+// Images that change based on AQI level
+const imageByLevel = {
+  good: "https://cdn.cdnparenting.com/articles/2018/07/1009601068-H.webp", // Happy children playing
+  satisfactory: "https://wowparenting.com/wp-content/uploads/2019/03/Untitled-design-1.png", // Active children
+  moderate: "https://www.slumbersac.ie/cdn/shop/articles/when-do-children-show-emotions.jpg?v=1723618502", // Concerned expression
+  poor: "https://media.emscimprovement.center/images/EMS220623_PEAKWebGraphics500x300_01.width-500.png", // Healthcare/distressed
+  veryPoor: "https://www.shutterstock.com/shutterstock/photos/2441390011/display_1500/stock-photo-sick-asian-boy-touching-neck-unwell-coughing-with-sore-throat-pain-lung-cancer-bronchitis-bronchial-2441390011.jpg", // Very unwell
+  severe: "https://ichef.bbci.co.uk/news/1024/cpsprodpb/1511/live/624819d0-6bf4-11f0-89ea-4d6f9851f623.jpg.webp", // Critical/hospital 
+};
+
 const ChildrenDiseaseCard = ({ aqi = 0 }) => {
   const level = getAQILevel(aqi);
   const diseases = diseasesByLevel[level] || [];
   const precaution = precautionsByLevel[level];
+  const cardImage = imageByLevel[level];
 
   return (
     <Card sx={{ mb: 2 }}>
       <CardMedia
         component="img"
         height="200"
-        image="https://parentingdiarieswithpreeti.com/wp-content/uploads/2022/04/small-baby.jpg"
-        alt="Children playing"
+        image={cardImage}
+        alt="Children health status"
         sx={{ objectFit: "cover" }}
       />
       <CardContent>

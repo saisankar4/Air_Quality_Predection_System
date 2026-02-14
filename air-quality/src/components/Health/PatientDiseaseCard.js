@@ -50,18 +50,29 @@ const precautionsByLevel = {
   severe: "Emergency hospitalization required. Call ambulance immediately. Critical medical intervention needed.",
 };
 
+// Images that change based on AQI level
+const imageByLevel = {
+  good: "https://www.rightpatient.com/wp-content/uploads/2023/11/The-Importance-of-Patient-Comfort-and-How-Biometrics-Can-Help.jpg", // Healthy patient 
+  satisfactory: "https://d14d5nk8lue86f.cloudfront.net/s3fs-public/styles/header_image/public/2021-01/Stable%20CAD%20With%20High-Risk%20Anatomy%20Warrants%20PCI%20or%20CABG%2C%20APPROACH%20Suggests.jpeg?itok=_QsSH71t", // Stable patient
+  moderate: "https://cdn.prod.website-files.com/67a9f7e05bb5f8e3e7410ca5/6836e47d8aeef5da82b72595_emergency_medicine.webp", // Medical attention
+  poor: "https://www.hopequre.com/live-images/blog-detil/General-physician.webp", // Doctor consultation
+  veryPoor: "https://www.2050healthcare.com/assets/images/service/bedside-about-us.webp", // Hospital care needed
+  severe: "https://www.parkhospital.in/storage/app/public/upload/rkngmFl4S0EOFU8uUohWnCXCAaUyFdPydZsZbAgI.png", // Critical/ICU
+};
+
 const PatientDiseaseCard = ({ aqi = 0 }) => {
   const level = getAQILevel(aqi);
   const diseases = diseasesByLevel[level] || [];
   const precaution = precautionsByLevel[level];
+  const cardImage = imageByLevel[level];
 
   return (
     <Card sx={{ mb: 2 }}>
       <CardMedia
         component="img"
         height="200"
-        image="https://anmj.org.au/wp-content/uploads/2020/03/Older-patient-specialling-in-acute-MAIN-WEB.jpg"
-        alt="Healthcare"
+        image={cardImage}
+        alt="Patient health status"
         sx={{ objectFit: "cover" }}
       />
       <CardContent>
