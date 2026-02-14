@@ -224,7 +224,7 @@ function Dashboard() {
         </Paper>
 
         {/* Main Content */}
-        <Box sx={{ display: "flex", gap: 3 }}>
+        <Box sx={{ display: "flex", gap: 3, flexDirection: { xs: 'column', md: 'row' } }}>
           {/* Left Column - Main Content */}
           <Box sx={{ flex: "2", minWidth: 0 }}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -256,12 +256,12 @@ function Dashboard() {
           <Box
             sx={{
               flex: "1",
-              minWidth: "300px",
-              position: "sticky",
-              top: 100,
+              minWidth: { xs: 'auto', md: '300px' },
+              position: { xs: 'static', md: 'sticky' },
+              top: { md: 100 },
               height: "fit-content",
-              maxHeight: "calc(100vh - 120px)",
-              overflowY: "auto",
+              maxHeight: { xs: 'none', md: 'calc(100vh - 120px)' },
+              overflowY: { xs: 'visible', md: 'auto' },
               paddingRight: 1,
               "&::-webkit-scrollbar": {
                 width: "6px",

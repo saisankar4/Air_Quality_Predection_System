@@ -26,3 +26,13 @@
   border-color: #1976d2;
   box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
 }
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    padding: 12px 8px;
+  }
+  .filter-select {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
