@@ -1,32 +1,56 @@
 import React from "react";
+import { Card, CardContent, Typography, Box } from "@mui/material";
+import { getAQIColor, getAQILevel, AQI_LEVELS } from "../theme";
 import "./AQIBox.css";
 
-const getColor = (aqi) => {
-  if (aqi <= 50) return "green";
-  if (aqi <= 100) return "#cccc00";
-  if (aqi <= 200) return "orange";
-  if (aqi <= 300) return "red";
-  return "maroon";
-};
-
-const getStatus = (aqi) => {
-  if (aqi <= 50) return "Good";
-  if (aqi <= 100) return "Satisfactory";
-  if (aqi <= 200) return "Moderate";
-  if (aqi <= 300) return "Poor";
-  return "Severe";
-};
-
 const AQIBox = ({ aqi }) => {
+  const level = getAQILevel(aqi);
+  const levelData = AQI_LEVELS[level];
+
   return (
-    <div className="aqi-box">
-      <h1 style={{ color: getColor(aqi) }} className="blink">
-        AQI: {aqi}
-      </h1>
-      <h2 className="status blink">
-        {getStatus(aqi)}
-      </h2>
-    </div>
+    <Card sx={{ position: "relative", overflow: "visible" }}>
+      <CardContent
+        sx={{
+          textAlign: "center",
+          py: 4,
+          backgroundImage: `linear-gradient(135deg, ${getAQIColor(aqi)}15 0%, transparent 100%)`,
+        }}
+      >
+        {/* Current AQI Value */}
+        <Box className="blink" sx={{ mb: 2 }}>
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: 700,
+              color: getAQIColor(aqi),
+              fontSize: "3rem",
+            }}
+          >
+            {Math.round(aqi)}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Air Quality Index
+          </Typography>
+        </Box>
+
+        {/* Status */}
+        <Box className="blink" sx={{ py: 2 }}>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 700,
+              color: getAQIColor(aqi),
+              mb: 1,
+            }}
+          >
+            {levelData.label}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Range: {levelData.min} - {levelData.max}
+          </Typography>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 
